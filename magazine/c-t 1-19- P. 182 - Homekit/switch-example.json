@@ -1,0 +1,173 @@
+[
+    {
+        "id": "932c6d7f.b25a18",
+        "type": "homekit-service",
+        "z": "d2325a72.99c0f8",
+        "bridge": "ac659f61.870828",
+        "name": "Basic1",
+        "serviceName": "BridgeConfiguration",
+        "manufacturer": "Default Manufacturer",
+        "model": "Default Model",
+        "serialNo": "Default Serial Number",
+        "characteristicProperties": "{}",
+        "x": 590,
+        "y": 200,
+        "wires": [
+            [
+                "2094ae86.0f7892"
+            ]
+        ]
+    },
+    {
+        "id": "823f599f.2b388",
+        "type": "change",
+        "z": "d2325a72.99c0f8",
+        "name": "StB: Move & Convert",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.On",
+                "tot": "msg"
+            },
+            {
+                "t": "change",
+                "p": "payload.On",
+                "pt": "msg",
+                "from": "0",
+                "fromt": "str",
+                "to": "false",
+                "tot": "bool"
+            },
+            {
+                "t": "change",
+                "p": "payload.On",
+                "pt": "msg",
+                "from": "1",
+                "fromt": "str",
+                "to": "true",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 620,
+        "y": 140,
+        "wires": [
+            [
+                "932c6d7f.b25a18"
+            ]
+        ]
+    },
+    {
+        "id": "2094ae86.0f7892",
+        "type": "change",
+        "z": "d2325a72.99c0f8",
+        "name": "BtS: Move & Convert",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payload.On",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            },
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "false",
+                "fromt": "bool",
+                "to": "0",
+                "tot": "str"
+            },
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "true",
+                "fromt": "bool",
+                "to": "1",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 620,
+        "y": 260,
+        "wires": [
+            [
+                "bb885cab.6da23"
+            ]
+        ]
+    },
+    {
+        "id": "bb885cab.6da23",
+        "type": "mqtt out",
+        "z": "d2325a72.99c0f8",
+        "name": "",
+        "topic": "smarthome/steckdose1/relay/0/set",
+        "qos": "1",
+        "retain": "false",
+        "broker": "51045b15.3bebc4",
+        "x": 630,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "6b79d2dd.16325c",
+        "type": "mqtt in",
+        "z": "d2325a72.99c0f8",
+        "name": "",
+        "topic": "smarthome/steckdose1/relay/0",
+        "qos": "2",
+        "broker": "51045b15.3bebc4",
+        "x": 600,
+        "y": 80,
+        "wires": [
+            [
+                "823f599f.2b388"
+            ]
+        ]
+    },
+    {
+        "id": "ac659f61.870828",
+        "type": "homekit-bridge",
+        "z": "",
+        "bridgeName": "Raspi1",
+        "pinCode": "111-11-111",
+        "port": "",
+        "manufacturer": "Default Manufacturer",
+        "model": "Default Model",
+        "serialNo": "Default Serial Number"
+    },
+    {
+        "id": "51045b15.3bebc4",
+        "type": "mqtt-broker",
+        "z": "",
+        "name": "MQTT",
+        "broker": "127.0.0.1",
+        "port": "1883",
+        "clientid": "",
+        "usetls": false,
+        "compatmode": true,
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": ""
+    }
+]
