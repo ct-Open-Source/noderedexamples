@@ -1,0 +1,196 @@
+[
+    {
+        "id": "4526300f.7216f",
+        "type": "inject",
+        "z": "d2325a72.99c0f8",
+        "name": "Demo-JSON",
+        "topic": "",
+        "payload": "{\"Time\":\"2018-11-17T16:11:12\",\"DHT22\":{\"Temperature\":22.9,\"Humidity\":54.1}}",
+        "payloadType": "json",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 310,
+        "y": 200,
+        "wires": [
+            [
+                "77dfef84.98139"
+            ]
+        ]
+    },
+    {
+        "id": "d4a1b360.4ab3a8",
+        "type": "homekit-service",
+        "z": "d2325a72.99c0f8",
+        "bridge": "ac659f61.870828",
+        "name": "Temp1",
+        "serviceName": "TemperatureSensor",
+        "manufacturer": "Default Manufacturer",
+        "model": "Default Model",
+        "serialNo": "Default Serial Number",
+        "characteristicProperties": "{}",
+        "x": 910,
+        "y": 180,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9e92b9d6.3d3a28",
+        "type": "homekit-service",
+        "z": "d2325a72.99c0f8",
+        "bridge": "ac659f61.870828",
+        "name": "Humid1",
+        "serviceName": "HumiditySensor",
+        "manufacturer": "Default Manufacturer",
+        "model": "Default Model",
+        "serialNo": "Default Serial Number",
+        "characteristicProperties": "{}",
+        "x": 920,
+        "y": 240,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "5d6df351.c822a4",
+        "type": "change",
+        "z": "d2325a72.99c0f8",
+        "name": "Temperature",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payload.DHT22.Temperature",
+                "pt": "msg",
+                "to": "payload.CurrentTemperature",
+                "tot": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "payload.DHT22",
+                "pt": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "payload.Time",
+                "pt": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 770,
+        "y": 180,
+        "wires": [
+            [
+                "d4a1b360.4ab3a8"
+            ]
+        ]
+    },
+    {
+        "id": "280566e4.493602",
+        "type": "change",
+        "z": "d2325a72.99c0f8",
+        "name": "Humidity",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payload.DHT22.Humidity",
+                "pt": "msg",
+                "to": "payload.CurrentRelativeHumidity",
+                "tot": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "payload.DHT22",
+                "pt": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "payload.Time",
+                "pt": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 760,
+        "y": 240,
+        "wires": [
+            [
+                "9e92b9d6.3d3a28"
+            ]
+        ]
+    },
+    {
+        "id": "77dfef84.98139",
+        "type": "json",
+        "z": "d2325a72.99c0f8",
+        "name": "",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 570,
+        "y": 200,
+        "wires": [
+            [
+                "5d6df351.c822a4",
+                "280566e4.493602"
+            ]
+        ]
+    },
+    {
+        "id": "30db8696.327c82",
+        "type": "mqtt in",
+        "z": "d2325a72.99c0f8",
+        "name": "",
+        "topic": "smarthome/steckdose1/SENSOR",
+        "qos": "2",
+        "broker": "51045b15.3bebc4",
+        "x": 340,
+        "y": 160,
+        "wires": [
+            [
+                "77dfef84.98139"
+            ]
+        ]
+    },
+    {
+        "id": "ac659f61.870828",
+        "type": "homekit-bridge",
+        "z": "",
+        "bridgeName": "Raspi1",
+        "pinCode": "111-11-111",
+        "port": "",
+        "manufacturer": "Default Manufacturer",
+        "model": "Default Model",
+        "serialNo": "Default Serial Number"
+    },
+    {
+        "id": "51045b15.3bebc4",
+        "type": "mqtt-broker",
+        "z": "",
+        "name": "MQTT",
+        "broker": "127.0.0.1",
+        "port": "1883",
+        "clientid": "",
+        "usetls": false,
+        "compatmode": true,
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": ""
+    }
+]
