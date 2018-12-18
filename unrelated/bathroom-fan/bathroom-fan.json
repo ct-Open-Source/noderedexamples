@@ -1,0 +1,510 @@
+[
+    {
+        "id": "6a38226c.0ca55c",
+        "type": "mqtt out",
+        "z": "b7c42280.2fd76",
+        "name": "Badlüfter",
+        "topic": "smarthome/bad/relay/0/set",
+        "qos": "",
+        "retain": "",
+        "broker": "25f7d1f2.c3f19e",
+        "x": 1140,
+        "y": 1040,
+        "wires": []
+    },
+    {
+        "id": "644d1e71.495d",
+        "type": "switch",
+        "z": "b7c42280.2fd76",
+        "name": "",
+        "property": "payload.humidity",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "gte",
+                "v": "65",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 370,
+        "y": 1220,
+        "wires": [
+            [
+                "e113c3b4.81731",
+                "a0c038db.59ac18"
+            ]
+        ]
+    },
+    {
+        "id": "e113c3b4.81731",
+        "type": "change",
+        "z": "b7c42280.2fd76",
+        "name": "Badlüfter an",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "1",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 590,
+        "y": 1220,
+        "wires": [
+            [
+                "6a38226c.0ca55c"
+            ]
+        ]
+    },
+    {
+        "id": "3412bc95.4d2a04",
+        "type": "mqtt out",
+        "z": "b7c42280.2fd76",
+        "name": "Badtemperatur",
+        "topic": "smarthome/badsteckdose/temperature",
+        "qos": "0",
+        "retain": "true",
+        "broker": "25f7d1f2.c3f19e",
+        "x": 640,
+        "y": 1080,
+        "wires": []
+    },
+    {
+        "id": "fae805d3.775f68",
+        "type": "change",
+        "z": "b7c42280.2fd76",
+        "name": "Badtemperatur",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payload.temperature",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 413.01441955566406,
+        "y": 1078.8694591522217,
+        "wires": [
+            [
+                "3412bc95.4d2a04"
+            ]
+        ]
+    },
+    {
+        "id": "6dab3aad.7ba054",
+        "type": "change",
+        "z": "b7c42280.2fd76",
+        "name": "Badluftfeuchtigkeit",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payload.humidity",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 419.23900413513184,
+        "y": 1140.5342049598694,
+        "wires": [
+            [
+                "9365cd6c.b8a06"
+            ]
+        ]
+    },
+    {
+        "id": "9365cd6c.b8a06",
+        "type": "mqtt out",
+        "z": "b7c42280.2fd76",
+        "name": "Badluftfeuchtigkeit",
+        "topic": "smarthome/badsteckdose/humidity",
+        "qos": "0",
+        "retain": "true",
+        "broker": "25f7d1f2.c3f19e",
+        "x": 650,
+        "y": 1140,
+        "wires": []
+    },
+    {
+        "id": "6eeaa4e4.9b4b0c",
+        "type": "change",
+        "z": "b7c42280.2fd76",
+        "name": "Fanmanual:1",
+        "rules": [
+            {
+                "t": "set",
+                "p": "fanmanual",
+                "pt": "global",
+                "to": "1",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 730,
+        "y": 760,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "50390ccb.50b0c4",
+        "type": "change",
+        "z": "b7c42280.2fd76",
+        "name": "Fanmanual:0",
+        "rules": [
+            {
+                "t": "set",
+                "p": "fanmanual",
+                "pt": "global",
+                "to": "0",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 830,
+        "y": 1000,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "5b922d0e.15ec94",
+        "type": "change",
+        "z": "b7c42280.2fd76",
+        "name": "Badlüfter aus",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "0",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 650,
+        "y": 1280,
+        "wires": [
+            [
+                "4bc55932.21d258"
+            ]
+        ]
+    },
+    {
+        "id": "362f404a.a2e42",
+        "type": "link in",
+        "z": "b7c42280.2fd76",
+        "name": "",
+        "links": [
+            "22f9ff3c.50b7a"
+        ],
+        "x": 235,
+        "y": 1120,
+        "wires": [
+            [
+                "644d1e71.495d",
+                "6dab3aad.7ba054",
+                "fae805d3.775f68"
+            ]
+        ]
+    },
+    {
+        "id": "bbfe2a34.97acd8",
+        "type": "mqtt in",
+        "z": "b7c42280.2fd76",
+        "name": "",
+        "topic": "zigbee2mqtt/knopf",
+        "qos": "2",
+        "broker": "25f7d1f2.c3f19e",
+        "x": 230,
+        "y": 820,
+        "wires": [
+            [
+                "dc60c719.c18d58"
+            ]
+        ]
+    },
+    {
+        "id": "dc60c719.c18d58",
+        "type": "json",
+        "z": "b7c42280.2fd76",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 430,
+        "y": 820,
+        "wires": [
+            [
+                "cfa74663.011078",
+                "fd5595fa.282a88"
+            ]
+        ]
+    },
+    {
+        "id": "cfa74663.011078",
+        "type": "switch",
+        "z": "b7c42280.2fd76",
+        "name": "Click",
+        "property": "payload.click",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "single",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "double",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 570,
+        "y": 820,
+        "wires": [
+            [
+                "6eeaa4e4.9b4b0c",
+                "80fff36c.ad761",
+                "138b98e5.0b3347"
+            ],
+            [
+                "6eeaa4e4.9b4b0c",
+                "80fff36c.ad761",
+                "138b98e5.0b3347"
+            ]
+        ]
+    },
+    {
+        "id": "fd5595fa.282a88",
+        "type": "switch",
+        "z": "b7c42280.2fd76",
+        "name": "Action",
+        "property": "payload.action",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "hold",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "release",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 430,
+        "y": 920,
+        "wires": [
+            [
+                "269ee51f.94b78a",
+                "50390ccb.50b0c4",
+                "ed20b28b.b7934"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "80fff36c.ad761",
+        "type": "stoptimer",
+        "z": "b7c42280.2fd76",
+        "duration": "15",
+        "units": "Minute",
+        "payloadtype": "num",
+        "payloadval": "0",
+        "name": "",
+        "x": 860,
+        "y": 800,
+        "wires": [
+            [
+                "269ee51f.94b78a",
+                "50390ccb.50b0c4"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "138b98e5.0b3347",
+        "type": "change",
+        "z": "b7c42280.2fd76",
+        "name": "Badlüfter an",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "1",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 990,
+        "y": 860,
+        "wires": [
+            [
+                "6a38226c.0ca55c"
+            ]
+        ]
+    },
+    {
+        "id": "269ee51f.94b78a",
+        "type": "change",
+        "z": "b7c42280.2fd76",
+        "name": "Badlüfter aus",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "0",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 990,
+        "y": 940,
+        "wires": [
+            [
+                "6a38226c.0ca55c"
+            ]
+        ]
+    },
+    {
+        "id": "a0c038db.59ac18",
+        "type": "stoptimer",
+        "z": "b7c42280.2fd76",
+        "duration": "15",
+        "units": "Minute",
+        "payloadtype": "num",
+        "payloadval": "0",
+        "name": "",
+        "x": 460,
+        "y": 1280,
+        "wires": [
+            [
+                "5b922d0e.15ec94"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "ed20b28b.b7934",
+        "type": "change",
+        "z": "b7c42280.2fd76",
+        "name": "Stop timer",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "stop",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 670,
+        "y": 880,
+        "wires": [
+            [
+                "80fff36c.ad761"
+            ]
+        ]
+    },
+    {
+        "id": "4bc55932.21d258",
+        "type": "switch",
+        "z": "b7c42280.2fd76",
+        "name": "Fanmanual?",
+        "property": "fanmanual",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "0",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 810,
+        "y": 1280,
+        "wires": [
+            [
+                "6a38226c.0ca55c"
+            ]
+        ]
+    },
+    {
+        "id": "25f7d1f2.c3f19e",
+        "type": "mqtt-broker",
+        "z": "",
+        "name": "IOT-Pi",
+        "broker": "127.0.0.1",
+        "port": "1883",
+        "clientid": "",
+        "usetls": false,
+        "compatmode": true,
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "closeTopic": "",
+        "closePayload": "",
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": ""
+    }
+]
