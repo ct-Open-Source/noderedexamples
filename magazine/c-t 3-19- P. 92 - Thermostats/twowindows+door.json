@@ -1,0 +1,477 @@
+[
+    {
+        "id": "1be258aa.6bbf87",
+        "type": "switch",
+        "z": "9be9d048.ca89d",
+        "name": "Auf/Zu",
+        "property": "payload.contact",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "false"
+            },
+            {
+                "t": "true"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 730,
+        "y": 320,
+        "wires": [
+            [
+                "cc1fc862.9570f8"
+            ],
+            [
+                "af89e323.53b1e"
+            ]
+        ]
+    },
+    {
+        "id": "cc1fc862.9570f8",
+        "type": "tado",
+        "z": "9be9d048.ca89d",
+        "configName": "95bd1898.a6afe8",
+        "apiCall": "setZoneOverlay",
+        "homeId": "12345",
+        "deviceId": "",
+        "zoneId": "2",
+        "power": "off",
+        "temperature": "18",
+        "terminationType": "manual",
+        "terminationTimeout": 900,
+        "name": "SZ: Heizung aus",
+        "x": 1280,
+        "y": 240,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9095188d.380bb8",
+        "type": "tado",
+        "z": "9be9d048.ca89d",
+        "configName": "95bd1898.a6afe8",
+        "apiCall": "clearZoneOverlay",
+        "homeId": "12345",
+        "deviceId": "",
+        "zoneId": "2",
+        "power": "on",
+        "temperature": "18",
+        "terminationType": "timer",
+        "terminationTimeout": "1",
+        "name": "SZ: Heizung auto",
+        "x": 1290,
+        "y": 300,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "6ab2a66d.05ff18",
+        "type": "rbe",
+        "z": "9be9d048.ca89d",
+        "name": "",
+        "func": "rbei",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "property": "payload.contact",
+        "x": 590,
+        "y": 320,
+        "wires": [
+            [
+                "1be258aa.6bbf87"
+            ]
+        ]
+    },
+    {
+        "id": "9aec49e.55e73b8",
+        "type": "mqtt in",
+        "z": "9be9d048.ca89d",
+        "name": "",
+        "topic": "zigbee2mqtt/Schlafzimmerfenster",
+        "qos": "2",
+        "broker": "25f7d1f2.c3f19e",
+        "x": 230,
+        "y": 320,
+        "wires": [
+            [
+                "3fd4abfe.5e8db4"
+            ]
+        ]
+    },
+    {
+        "id": "3fd4abfe.5e8db4",
+        "type": "json",
+        "z": "9be9d048.ca89d",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 450,
+        "y": 320,
+        "wires": [
+            [
+                "6ab2a66d.05ff18",
+                "2308e0d1.20513"
+            ]
+        ]
+    },
+    {
+        "id": "2308e0d1.20513",
+        "type": "change",
+        "z": "9be9d048.ca89d",
+        "name": "SZ-Fenster",
+        "rules": [
+            {
+                "t": "set",
+                "p": "szfensterg",
+                "pt": "global",
+                "to": "payload.contact",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 610,
+        "y": 240,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "99f6431f.f7ca3",
+        "type": "mqtt in",
+        "z": "9be9d048.ca89d",
+        "name": "",
+        "topic": "zigbee2mqtt/Terassentür",
+        "qos": "2",
+        "broker": "25f7d1f2.c3f19e",
+        "x": 210,
+        "y": 600,
+        "wires": [
+            [
+                "3075f023.d6d1d"
+            ]
+        ]
+    },
+    {
+        "id": "3075f023.d6d1d",
+        "type": "json",
+        "z": "9be9d048.ca89d",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 450,
+        "y": 600,
+        "wires": [
+            [
+                "5d46b678.573bc8",
+                "9c4edd8f.dc174"
+            ]
+        ]
+    },
+    {
+        "id": "5d46b678.573bc8",
+        "type": "change",
+        "z": "9be9d048.ca89d",
+        "name": "Terassentür",
+        "rules": [
+            {
+                "t": "set",
+                "p": "trtürg",
+                "pt": "global",
+                "to": "payload.contact",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 590,
+        "y": 660,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9c4edd8f.dc174",
+        "type": "rbe",
+        "z": "9be9d048.ca89d",
+        "name": "",
+        "func": "rbei",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "property": "payload.contact",
+        "x": 590,
+        "y": 600,
+        "wires": [
+            [
+                "9f1a15ae.dbfe38"
+            ]
+        ]
+    },
+    {
+        "id": "af89e323.53b1e",
+        "type": "switch",
+        "z": "9be9d048.ca89d",
+        "name": "Terassentür zu?",
+        "property": "trtür",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "false"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 860,
+        "y": 400,
+        "wires": [
+            [
+                "9095188d.380bb8"
+            ],
+            [
+                "54ea0e1e.3ec7e"
+            ]
+        ]
+    },
+    {
+        "id": "54ea0e1e.3ec7e",
+        "type": "switch",
+        "z": "9be9d048.ca89d",
+        "name": "SZ: Tür zu?",
+        "property": "sztür",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "true"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 1050,
+        "y": 420,
+        "wires": [
+            [
+                "9095188d.380bb8"
+            ]
+        ]
+    },
+    {
+        "id": "69217451.4ecd6c",
+        "type": "mqtt in",
+        "z": "9be9d048.ca89d",
+        "name": "",
+        "topic": "zigbee2mqtt/zimmertuer",
+        "qos": "2",
+        "broker": "25f7d1f2.c3f19e",
+        "x": 220,
+        "y": 460,
+        "wires": [
+            [
+                "1ca4b6f5.8f0589"
+            ]
+        ]
+    },
+    {
+        "id": "1ca4b6f5.8f0589",
+        "type": "json",
+        "z": "9be9d048.ca89d",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 430,
+        "y": 460,
+        "wires": [
+            [
+                "adc5ea15.b110a8"
+            ]
+        ]
+    },
+    {
+        "id": "adc5ea15.b110a8",
+        "type": "change",
+        "z": "9be9d048.ca89d",
+        "name": "SZ: Tür",
+        "rules": [
+            {
+                "t": "set",
+                "p": "sztür",
+                "pt": "global",
+                "to": "payload.contact",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 580,
+        "y": 460,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9f1a15ae.dbfe38",
+        "type": "switch",
+        "z": "9be9d048.ca89d",
+        "name": "Auf/Zu",
+        "property": "payload.contact",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "false"
+            },
+            {
+                "t": "true"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 730,
+        "y": 600,
+        "wires": [
+            [
+                "9d0ea04f.cd6a9",
+                "7e90e281.bdeedc"
+            ],
+            [
+                "5b19122d.97639c"
+            ]
+        ]
+    },
+    {
+        "id": "9d0ea04f.cd6a9",
+        "type": "tado",
+        "z": "9be9d048.ca89d",
+        "configName": "95bd1898.a6afe8",
+        "apiCall": "setZoneOverlay",
+        "homeId": "12345",
+        "deviceId": "",
+        "zoneId": "1",
+        "power": "off",
+        "temperature": "18",
+        "terminationType": "manual",
+        "terminationTimeout": 900,
+        "name": "Stube: Heizung aus",
+        "x": 1310,
+        "y": 580,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "62bd7f5a.bc779",
+        "type": "tado",
+        "z": "9be9d048.ca89d",
+        "configName": "95bd1898.a6afe8",
+        "apiCall": "clearZoneOverlay",
+        "homeId": "12345",
+        "deviceId": "",
+        "zoneId": "1",
+        "power": "on",
+        "temperature": "18",
+        "terminationType": "timer",
+        "terminationTimeout": "1",
+        "name": "Stube: Heizung auto",
+        "x": 1320,
+        "y": 640,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "5b19122d.97639c",
+        "type": "switch",
+        "z": "9be9d048.ca89d",
+        "name": "SZ: Fenster zu?",
+        "property": "szfensterg",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "false"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 880,
+        "y": 640,
+        "wires": [
+            [
+                "62bd7f5a.bc779"
+            ],
+            [
+                "a19b24fb.fad118"
+            ]
+        ]
+    },
+    {
+        "id": "a19b24fb.fad118",
+        "type": "switch",
+        "z": "9be9d048.ca89d",
+        "name": "SZ: Tür zu?",
+        "property": "sztür",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "true"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 1090,
+        "y": 720,
+        "wires": [
+            [
+                "62bd7f5a.bc779"
+            ]
+        ]
+    },
+    {
+        "id": "7e90e281.bdeedc",
+        "type": "switch",
+        "z": "9be9d048.ca89d",
+        "name": "SZ: Tür zu?",
+        "property": "sztür",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "false"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 890,
+        "y": 500,
+        "wires": [
+            [
+                "cc1fc862.9570f8"
+            ]
+        ]
+    }
+]
