@@ -1,0 +1,121 @@
+[
+    {
+        "id": "fb4cf608.efd23",
+        "type": "mqtt in",
+        "z": "d2325a72.99c0f8",
+        "name": "",
+        "topic": "zigbee2mqtt/Schlafzimmerfenster",
+        "qos": "2",
+        "broker": "25f7d1f2.c3f19e",
+        "x": 190,
+        "y": 3460,
+        "wires": [
+            [
+                "85558f1f.aff9e8"
+            ]
+        ]
+    },
+    {
+        "id": "85558f1f.aff9e8",
+        "type": "json",
+        "z": "d2325a72.99c0f8",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 470,
+        "y": 3460,
+        "wires": [
+            [
+                "4b0b6fed.d835a"
+            ]
+        ]
+    },
+    {
+        "id": "4b0b6fed.d835a",
+        "type": "rbe",
+        "z": "d2325a72.99c0f8",
+        "name": "",
+        "func": "rbei",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "property": "payload.contact",
+        "x": 610,
+        "y": 3460,
+        "wires": [
+            [
+                "3413cb92.a9ea2c"
+            ]
+        ]
+    },
+    {
+        "id": "3413cb92.a9ea2c",
+        "type": "switch",
+        "z": "d2325a72.99c0f8",
+        "name": "Auf/Zu",
+        "property": "payload.contact",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "false"
+            },
+            {
+                "t": "true"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 750,
+        "y": 3460,
+        "wires": [
+            [
+                "24b3e737.273838"
+            ],
+            [
+                "d358c214.cd3768"
+            ]
+        ]
+    },
+    {
+        "id": "24b3e737.273838",
+        "type": "tado",
+        "z": "d2325a72.99c0f8",
+        "configName": "95bd1898.a6afe8",
+        "apiCall": "setZoneOverlay",
+        "homeId": "12345",
+        "deviceId": "",
+        "zoneId": "2",
+        "power": "off",
+        "temperature": "18",
+        "terminationType": "manual",
+        "terminationTimeout": 900,
+        "name": "SZ: Heizung aus",
+        "x": 920,
+        "y": 3420,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "d358c214.cd3768",
+        "type": "tado",
+        "z": "d2325a72.99c0f8",
+        "configName": "95bd1898.a6afe8",
+        "apiCall": "clearZoneOverlay",
+        "homeId": "12345",
+        "deviceId": "",
+        "zoneId": "2",
+        "power": "on",
+        "temperature": "18",
+        "terminationType": "timer",
+        "terminationTimeout": "1",
+        "name": "SZ: Heizung auto",
+        "x": 930,
+        "y": 3500,
+        "wires": [
+            []
+        ]
+    }
+]
