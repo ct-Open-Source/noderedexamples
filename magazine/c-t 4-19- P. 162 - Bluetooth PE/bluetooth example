@@ -1,0 +1,258 @@
+[
+    {
+        "id": "e3d17c9b.8c9a1",
+        "type": "stoptimer",
+        "z": "5d02649b.fb444c",
+        "duration": "20",
+        "units": "Minute",
+        "payloadtype": "str",
+        "payloadval": "outofrange",
+        "name": "",
+        "x": 540,
+        "y": 340,
+        "wires": [
+            [],
+            [
+                "e956691b.e03bf8"
+            ]
+        ]
+    },
+    {
+        "id": "e956691b.e03bf8",
+        "type": "change",
+        "z": "5d02649b.fb444c",
+        "name": "Andi weg",
+        "rules": [
+            {
+                "t": "set",
+                "p": "andigone",
+                "pt": "global",
+                "to": "true",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 540,
+        "y": 400,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "6e032082.da999",
+        "type": "change",
+        "z": "5d02649b.fb444c",
+        "name": "Andi da",
+        "rules": [
+            {
+                "t": "set",
+                "p": "andigone",
+                "pt": "global",
+                "to": "false",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 900,
+        "y": 140,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "5c77875e.155398",
+        "type": "delay",
+        "z": "5d02649b.fb444c",
+        "name": "15 Sekunden verzögern",
+        "pauseType": "delay",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "x": 710,
+        "y": 140,
+        "wires": [
+            [
+                "6e032082.da999"
+            ]
+        ]
+    },
+    {
+        "id": "8baf20a9.46355",
+        "type": "change",
+        "z": "5d02649b.fb444c",
+        "name": "Lampe an",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "on",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 570,
+        "y": 200,
+        "wires": [
+            [
+                "22564a0.73b52b6",
+                "5c77875e.155398"
+            ]
+        ]
+    },
+    {
+        "id": "22564a0.73b52b6",
+        "type": "switch",
+        "z": "5d02649b.fb444c",
+        "name": "Andi weg gewesen?",
+        "property": "andigone",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "true"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 600,
+        "y": 260,
+        "wires": [
+            [
+                "1f6843f1.0e3d4c",
+                "a0406f0c.95881"
+            ]
+        ]
+    },
+    {
+        "id": "2d309c97.388414",
+        "type": "stoptimer",
+        "z": "5d02649b.fb444c",
+        "duration": "15",
+        "units": "Minute",
+        "payloadtype": "num",
+        "payloadval": "0",
+        "name": "",
+        "x": 900,
+        "y": 260,
+        "wires": [
+            [
+                "a0406f0c.95881"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "1f6843f1.0e3d4c",
+        "type": "change",
+        "z": "5d02649b.fb444c",
+        "name": "Lampe aus",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "off",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 790,
+        "y": 200,
+        "wires": [
+            [
+                "2d309c97.388414"
+            ]
+        ]
+    },
+    {
+        "id": "88c5cf19.a95",
+        "type": "scan ble",
+        "z": "5d02649b.fb444c",
+        "uuids": "",
+        "duplicates": true,
+        "name": "",
+        "x": 170,
+        "y": 200,
+        "wires": [
+            [
+                "e53760f2.e5f97",
+                "a26189cc.525328"
+            ]
+        ]
+    },
+    {
+        "id": "e53760f2.e5f97",
+        "type": "switch",
+        "z": "5d02649b.fb444c",
+        "name": "Mac",
+        "property": "payload.peripheralUuid",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "1234567",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 370,
+        "y": 200,
+        "wires": [
+            [
+                "e3d17c9b.8c9a1",
+                "8baf20a9.46355"
+            ]
+        ]
+    },
+    {
+        "id": "a26189cc.525328",
+        "type": "switch",
+        "z": "5d02649b.fb444c",
+        "name": "UUID",
+        "property": "advertisement.serviceUuids[0]",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "cont",
+                "v": "12345678",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 370,
+        "y": 240,
+        "wires": [
+            [
+                "8baf20a9.46355",
+                "e3d17c9b.8c9a1"
+            ]
+        ]
+    }
+]
