@@ -1,0 +1,205 @@
+[
+    {
+        "id": "3f00cf61.b46088",
+        "type": "switch",
+        "z": "5e3bac55.5a4f5c",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "1",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "0",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 570,
+        "y": 320,
+        "wires": [
+            [
+                "4f65f90b.d45e2",
+                "78249c09.9ee5b4"
+            ],
+            [
+                "3cf7e391.6f2bc4"
+            ]
+        ]
+    },
+    {
+        "id": "3cf7e391.6f2bc4",
+        "type": "change",
+        "z": "5e3bac55.5a4f5c",
+        "name": "PLD to STOP",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "STOP",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 579.5757904052734,
+        "y": 367.3939542770386,
+        "wires": [
+            [
+                "4f65f90b.d45e2",
+                "78249c09.9ee5b4"
+            ]
+        ]
+    },
+    {
+        "id": "4f65f90b.d45e2",
+        "type": "stoptimer",
+        "z": "5e3bac55.5a4f5c",
+        "duration": "5",
+        "units": "Minute",
+        "payloadtype": "num",
+        "payloadval": "0",
+        "name": "",
+        "x": 817.4141883850098,
+        "y": 316.78787326812744,
+        "wires": [
+            [
+                "4a8c1a8c.83cfbc",
+                "4a8c1a8c.83cfbc",
+                "4a8c1a8c.83cfbc",
+                "4a8c1a8c.83cfbc",
+                "4a8c1a8c.83cfbc",
+                "4a8c1a8c.83cfbc",
+                "4a8c1a8c.83cfbc",
+                "4a8c1a8c.83cfbc",
+                "76db291e.1e22b"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "4a8c1a8c.83cfbc",
+        "type": "stoptimer",
+        "z": "5e3bac55.5a4f5c",
+        "duration": "15",
+        "units": "Minute",
+        "payloadtype": "num",
+        "payloadval": "0",
+        "name": "",
+        "x": 1084.404010772705,
+        "y": 271.3636169433594,
+        "wires": [
+            [],
+            [
+                "76db291e.1e22b"
+            ]
+        ]
+    },
+    {
+        "id": "78249c09.9ee5b4",
+        "type": "stoptimer",
+        "z": "5e3bac55.5a4f5c",
+        "duration": "14",
+        "units": "Minute",
+        "payloadtype": "str",
+        "payloadval": "STOP",
+        "name": "",
+        "x": 833.555591583252,
+        "y": 383.3838357925415,
+        "wires": [
+            [
+                "eba5d8dc.c82ef",
+                "eba5d8dc.c82ef",
+                "eba5d8dc.c82ef",
+                "eba5d8dc.c82ef",
+                "eba5d8dc.c82ef",
+                "eba5d8dc.c82ef",
+                "eba5d8dc.c82ef",
+                "eba5d8dc.c82ef"
+            ],
+            [
+                "4a8c1a8c.83cfbc",
+                "4a8c1a8c.83cfbc",
+                "4a8c1a8c.83cfbc",
+                "4a8c1a8c.83cfbc",
+                "4a8c1a8c.83cfbc",
+                "4a8c1a8c.83cfbc",
+                "4a8c1a8c.83cfbc",
+                "4a8c1a8c.83cfbc"
+            ]
+        ]
+    },
+    {
+        "id": "eba5d8dc.c82ef",
+        "type": "stoptimer",
+        "z": "5e3bac55.5a4f5c",
+        "duration": "31",
+        "units": "Minute",
+        "payloadtype": "num",
+        "payloadval": "0",
+        "name": "",
+        "x": 1087.0101280212402,
+        "y": 346.565655708313,
+        "wires": [
+            [],
+            [
+                "76db291e.1e22b"
+            ]
+        ]
+    },
+    {
+        "id": "76db291e.1e22b",
+        "type": "mqtt out",
+        "z": "5e3bac55.5a4f5c",
+        "name": "",
+        "topic": "",
+        "qos": "",
+        "retain": "",
+        "x": 1430,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "f9299e85.1a383",
+        "type": "mqtt in",
+        "z": "5e3bac55.5a4f5c",
+        "name": "",
+        "topic": "",
+        "qos": "2",
+        "x": 270,
+        "y": 320,
+        "wires": [
+            [
+                "dcce8b2f.663b5"
+            ]
+        ]
+    },
+    {
+        "id": "dcce8b2f.663b5",
+        "type": "rbe",
+        "z": "5e3bac55.5a4f5c",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "property": "payload",
+        "x": 410,
+        "y": 320,
+        "wires": [
+            [
+                "3f00cf61.b46088"
+            ]
+        ]
+    }
+]
